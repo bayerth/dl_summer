@@ -1,0 +1,39 @@
+[project]
+name = "dl_summer"
+version = "0.1.0"
+description = "Deep Learning Summer Lecture Project"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "jupyter",
+    "jupyterlab",
+    "torch",
+    "torchtune",
+    "torchvision",
+    "torchao",
+    "torchtext",
+    "tensorflow",
+    "tensorflow-metal; sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "tensorflow_datasets",
+    "keras",
+    "keras-nlp",
+    "transformers",
+    "sentence-transformers",
+    "huggingface-hub",
+    "adapters",
+    "datasets",
+    "peft",
+    "evaluate",
+    "trl",
+    "tokenizers",
+    "sentencepiece",
+    "tqdm",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
