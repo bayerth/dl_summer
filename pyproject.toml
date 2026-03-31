@@ -3,7 +3,7 @@ name = "dl_summer"
 version = "0.1.0"
 description = "Deep Learning Summer Lecture Project"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 dependencies = [
     "jupyter",
     "jupyterlab",
@@ -12,7 +12,7 @@ dependencies = [
     "torchvision",
     "torchao",
     "torchtext",
-    "tensorflow",
+    "tensorflow==2.19.*",
     "tensorflow-metal; sys_platform == 'darwin' and platform_machine == 'arm64'",
     "tensorflow_datasets",
     "keras",
