@@ -35,11 +35,39 @@ The `notebooks/1 machin learning basics/` directory contains introductory notebo
    ```bash
    git clone https://github.com/bayerth/ppl.git
    ```
-2. Install required Python packages using `pip`:
+2. Create and activate the default environment for notebooks that do not need TensorFlow:
    ```bash
-   pip install -e .
+   python3.12 -m venv .venv
+   source .venv/bin/activate
+   python -m pip install -U pip setuptools wheel
+   python -m pip install -e .
    ```
 3. Open and run the Jupyter Notebooks in the `notebooks/` directory.
+
+### TensorFlow Environment on Apple Silicon
+
+TensorFlow is optional and should be installed only in the dedicated `.venv312` environment. This keeps the default
+`.venv` smaller and avoids mixing TensorFlow/Metal constraints with the PyTorch notebooks.
+
+```bash
+python3.12 -m venv .venv312
+source .venv312/bin/activate
+python -m pip install -U pip setuptools wheel
+python -m pip install -e ".[tf]"
+```
+
+Register both environments as Jupyter kernels if you want to switch per notebook:
+
+```bash
+source .venv/bin/activate
+python -m ipykernel install --user --name dl_summer --display-name "dl_summer (.venv)"
+
+source .venv312/bin/activate
+python -m ipykernel install --user --name dl_summer_tf --display-name "dl_summer TF (.venv312)"
+```
+
+Use `dl_summer (.venv)` for PyTorch notebooks such as `torch_fashion_mnist.ipynb`. Use
+`dl_summer TF (.venv312)` for TensorFlow/Keras notebooks.
 
 ## RNN Shakespeare Training
 
@@ -101,14 +129,23 @@ Runner parameters:
 
 ### Apple Silicon Users (M1, M2, M3, ...)
 
-For Apple Silicon users, it is recommended to use:
-
-- **Python 3.12**
-- **TensorFlow 2.19**
-- **TensorFlow-metal** (for GPU acceleration)
+Apple Silicon TensorFlow support is provided by the optional `tf` extra in `pyproject.toml`:
 
 ```bash
-pip install tensorflow==2.19.* tensorflow-metal
+source .venv312/bin/activate
+python -m pip install -e ".[tf]"
+```
+
+Check that TensorFlow sees the Metal device:
+
+```bash
+python - <<'PY'
+import tensorflow as tf
+
+print(tf.__version__)
+print(tf.config.list_physical_devices())
+print(tf.config.list_physical_devices("GPU"))
+PY
 ```
 
 ## Shakespeare RNN Training
