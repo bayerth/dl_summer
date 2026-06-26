@@ -35,7 +35,7 @@ tf = [
     "tensorflow-metal; sys_platform == 'darwin' and platform_machine == 'arm64'",
     "tensorflow_datasets",
     "keras",
-    "keras-nlp",
+    "keras-hub",
 ]
 
 [build-system]
